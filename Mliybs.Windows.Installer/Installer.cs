@@ -86,7 +86,7 @@ namespace Mliybs.Windows.Installer
             app.Close();
         }
 
-        public static string Install(string id, string displayName, string displayIcon, string displayVersion, string uninstallPath, string installLocation = null)
+        public static string Install(string id, string displayName, string displayIcon, string displayVersion, string uninstallPath, string installLocation = null, bool installToCurrentUser = false)
         {
             var path = installLocation ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), displayName);
 
@@ -97,7 +97,7 @@ namespace Mliybs.Windows.Installer
                 { DisplayVersion, displayVersion },
                 { InstallLocation, path },
                 { UninstallString, uninstallPath}
-            });
+            }, installToCurrentUser: installToCurrentUser);
 
             return path;
         }
@@ -116,7 +116,7 @@ namespace Mliybs.Windows.Installer
             uninstall.DeleteSubKey(id);
         }
 
-        public static void CreateShortCut(string name, string originPath, string iconLocation = null)
+        public static void CreateShortcut(string name, string originPath, string iconLocation = null)
         {
             var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), name + ".lnk");
             var shell = new WshShell();
