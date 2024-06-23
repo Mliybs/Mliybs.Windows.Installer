@@ -66,8 +66,6 @@ namespace Mliybs.Windows.Installer
 
         public const string NoRepair = nameof(NoRepair);
 
-        public static string NewGuid => new Guid().ToString("B");
-
         public static void Install(string id, IDictionary<string, object> pairs, bool permissionCheck = true, bool installToCurrentUser = false)
         {
             if (permissionCheck)
